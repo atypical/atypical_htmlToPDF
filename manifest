@@ -1,0 +1,18 @@
+#
+# this is your module manifest and used by Titanium
+# during compilation, packaging, distribution, etc.
+#
+version: 0.1
+apiversion: 2
+description: My module
+author: atypical co
+license: Specify your license
+copyright: Copyright (c) 2013 by Your Company
+
+
+# these should not be edited
+name: atypical_htmlToPDF
+moduleid: com.atypical.htmlToPDF
+guid: 52d4ed3d-a173-4db7-8dcc-b5b3b1137715
+platform: iphone
+minsdk: 3.1.3.GA
