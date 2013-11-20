@@ -120,11 +120,6 @@
 
 
 
-
-
-
-
-
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
     NSLog(@"[INFO] didFailLoadWithError called");
 }
@@ -164,7 +159,7 @@
         dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
                                                        NSUserDomainMask, YES);
         
-        path = [NSString stringWithFormat:@"%@/%@",[dirPaths objectAtIndex:0], @"Expose.pdf"];
+        path = [NSString stringWithFormat:@"%@/%@",[dirPaths objectAtIndex:0], @"temp_file_name.pdf"];
         TiBlob* pdfBlob = [[[TiBlob alloc] initWithData:pdfData
 											   mimetype:@"application/octet-stream"] autorelease];
         NSLog(@"[INFO] writing blob to: %@", path)

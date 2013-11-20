@@ -4,10 +4,10 @@
 #
 version: 0.1
 apiversion: 2
-description: My module
+description: Convert HTML (and any content - text, images, etc - into a .pdf
 author: atypical co
-license: Specify your license
-copyright: Copyright (c) 2013 by Your Company
+license: MIT
+copyright: Copyright (c) 2013 atypical co
 
 
 # these should not be edited
