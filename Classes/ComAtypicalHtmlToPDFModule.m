@@ -133,6 +133,23 @@
     NSLog(@"[INFO] webViewDidStartLoad called");
 }
 
+
+
+NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+-(NSString *) genRandStringLength: (int) len {
+	
+    NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
+	
+    for (int i=0; i<len; i++) {
+		[randomString appendFormat: @"%C", [letters characterAtIndex: arc4random() % [letters length]]];
+    }
+	
+    return randomString;
+}
+
+
+
 -(void)webViewDidFinishLoad:(UIWebView *)webView {
     NSLog(@"[INFO] webViewDidFinishLoad called");
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -158,8 +175,19 @@
         
         dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
                                                        NSUserDomainMask, YES);
+		
+		
+		NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+		NSMutableString *randomString = [NSMutableString stringWithCapacity: 20];
+		
+		for (int i=0; i<20; i++) {
+			[randomString appendFormat: @"%C", [letters characterAtIndex: arc4random() % [letters length]]];
+		}
         
-        path = [NSString stringWithFormat:@"%@/%@",[dirPaths objectAtIndex:0], @"temp_file_name.pdf"];
+		NSLog(@"[INFO] randomString randomString %@", randomString);
+		
+        path = [NSString stringWithFormat:@"%@/%@",[dirPaths objectAtIndex:0], randomString];
         TiBlob* pdfBlob = [[[TiBlob alloc] initWithData:pdfData
 											   mimetype:@"application/octet-stream"] autorelease];
         NSLog(@"[INFO] writing blob to: %@", path)
