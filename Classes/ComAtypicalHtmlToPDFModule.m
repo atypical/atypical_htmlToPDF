@@ -37,7 +37,7 @@
     NSLog(@"[INFO] PDF CREATED");
     return pdfData;
     
-    [super dealloc];
+//    [super dealloc];
 }
 @end
 
@@ -85,7 +85,7 @@
 -(void)dealloc
 {
 	// release any resources that have been retained by the module
-	[super dealloc];
+	//[super dealloc];
 }
 
 #pragma mark Internal Memory Management
@@ -144,10 +144,10 @@
         
         [render addPrintFormatter:webView.viewPrintFormatter startingAtPageAtIndex:0];
         
-        CGRect printableRect = CGRectMake(36,
-                                          72,
-                                          540,
-                                          684);
+        CGRect printableRect = CGRectMake(5,
+                                          5,
+                                          599,
+                                          730);
         
         CGRect paperRect = CGRectMake(0, 0, 690, 792);
         
@@ -171,8 +171,8 @@
 		
         path = [NSString stringWithFormat:@"%@/%@%@",[dirPaths objectAtIndex:0], randomString, @".pdf"];
         
-        TiBlob* pdfBlob = [[[TiBlob alloc] initWithData:pdfData
-											   mimetype:@"application/octet-stream"] autorelease];
+        TiBlob* pdfBlob = [[TiBlob alloc] initWithData:pdfData
+											   mimetype:@"application/octet-stream"];
         NSLog(@"[INFO] writing blob to: %@", path)
         [pdfBlob writeTo: path error:NULL];
         
