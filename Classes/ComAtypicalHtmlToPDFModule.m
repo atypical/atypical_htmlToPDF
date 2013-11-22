@@ -17,8 +17,7 @@
 
 @implementation UIPrintPageRenderer (PDF)
 
-- (NSData*) printToPDF
-{
+- (NSData*) printToPDF{
     NSMutableData *pdfData = [NSMutableData data];
     
     UIGraphicsBeginPDFContextToData( pdfData, CGRectZero, nil );
@@ -35,8 +34,10 @@
     }
     
     UIGraphicsEndPDFContext();
-    
+    NSLog(@"[INFO] PDF CREATED");
     return pdfData;
+    
+    [super dealloc];
 }
 @end
 
@@ -135,21 +136,6 @@
 
 
 
-NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-
--(NSString *) genRandStringLength: (int) len {
-	
-    NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
-	
-    for (int i=0; i<len; i++) {
-		[randomString appendFormat: @"%C", [letters characterAtIndex: arc4random() % [letters length]]];
-    }
-	
-    return randomString;
-}
-
-
-
 -(void)webViewDidFinishLoad:(UIWebView *)webView {
     NSLog(@"[INFO] webViewDidFinishLoad called");
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -163,7 +149,7 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
                                           540,
                                           684);
         
-        CGRect paperRect = CGRectMake(0, 0, 612, 792);
+        CGRect paperRect = CGRectMake(0, 0, 690, 792);
         
         [render setValue:[NSValue valueWithCGRect:paperRect] forKey:@"paperRect"];
         [render setValue:[NSValue valueWithCGRect:printableRect] forKey:@"printableRect"];
@@ -175,19 +161,16 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
         
         dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
                                                        NSUserDomainMask, YES);
-		
-		
+				
 		NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-
 		NSMutableString *randomString = [NSMutableString stringWithCapacity: 20];
-		
 		for (int i=0; i<20; i++) {
 			[randomString appendFormat: @"%C", [letters characterAtIndex: arc4random() % [letters length]]];
 		}
-        
-		NSLog(@"[INFO] randomString randomString %@", randomString);
+		NSLog(@"[INFO] randomString %@", randomString);
 		
-        path = [NSString stringWithFormat:@"%@/%@",[dirPaths objectAtIndex:0], randomString];
+        path = [NSString stringWithFormat:@"%@/%@%@",[dirPaths objectAtIndex:0], randomString, @".pdf"];
+        
         TiBlob* pdfBlob = [[[TiBlob alloc] initWithData:pdfData
 											   mimetype:@"application/octet-stream"] autorelease];
         NSLog(@"[INFO] writing blob to: %@", path)
@@ -200,12 +183,6 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
         NSLog(@"[INFO] webViewDidFinishLoad done");
     });
 }
-
-
-
-
-
-
 
 
 
